@@ -22,7 +22,6 @@ function App() {
             </ProtectedRoute>
           } 
         />
-        {/* Dynamic route for blog posts */}
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
