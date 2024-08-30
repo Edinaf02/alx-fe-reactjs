@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -10,6 +11,9 @@ const RegistrationForm = () => {
 
     // Basic validation
     const newErrors = {};
+    if (!username) {
+      newErrors.username = 'Username is required';
+    }
     if (!email) {
       newErrors.email = 'Email is required';
     }
@@ -29,6 +33,15 @@ const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
+      </div>
       <div>
         <label>Email:</label>
         <input
