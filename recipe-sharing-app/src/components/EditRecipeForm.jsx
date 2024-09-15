@@ -7,8 +7,8 @@ const EditRecipeForm = ({ recipe }) => {
   const [description, setDescription] = useState(recipe.description);
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission
     updateRecipe({ ...recipe, title, description });
   };
 
@@ -19,11 +19,13 @@ const EditRecipeForm = ({ recipe }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
+        required
       />
       <button type="submit">Update Recipe</button>
     </form>
