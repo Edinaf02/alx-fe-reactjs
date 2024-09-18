@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
-import RecipeDetail from './components/RecipeDetail';  // Create this component to show recipe details
+import RecipeDetail from './components/RecipeDetail';
+import AddRecipeForm from './components/AddRecipeForm';  // Import the AddRecipeForm
 
 const RecipeSharingApp = () => {
   return (
@@ -12,7 +13,8 @@ const RecipeSharingApp = () => {
         <SearchBar />
         <Routes>
           <Route path="/" element={<RecipeList />} />
-          <Route path="/recipe/:id" element={<RecipeDetail />} />  {/* Route for recipe detail */}
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
+          <Route path="/add-recipe" element={<AddRecipeForm />} />  {/* Add Recipe Form route */}
         </Routes>
       </div>
     </Router>
