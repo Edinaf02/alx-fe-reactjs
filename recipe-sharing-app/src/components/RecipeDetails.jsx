@@ -1,13 +1,11 @@
-// src/components/RecipeDetails.jsx
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecipeStore } from '../recipeStore';
-import EditRecipeForm from './EditRecipeForm';
-import DeleteRecipeButton from './DeleteRecipeButton';
+import { useRecipeStore } from '../store/recipeStore';
 
-const RecipeDetails = () => {
-  const { recipeId } = useParams();
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((recipe) => recipe.id === recipeId)
+const RecipeDetail = () => {
+  const { id } = useParams();
+  const recipe = useRecipeStore(state => 
+    state.recipes.find(recipe => recipe.id === parseInt(id))
   );
 
   if (!recipe) {
@@ -15,13 +13,17 @@ const RecipeDetails = () => {
   }
 
   return (
-    <div>
-      <h1>{recipe.title}</h1>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">{recipe.title}</h1>
       <p>{recipe.description}</p>
-      <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton recipeId={recipeId} />
+      <h2 className="font-bold mt-4">Ingredients:</h2>
+      <ul>
+        {recipe.ingredients.map((ingredient, index) => (
+          <li key={index}>{ingredient}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default RecipeDetails;
+export default RecipeDetail;
