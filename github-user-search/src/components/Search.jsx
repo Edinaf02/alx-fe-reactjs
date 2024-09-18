@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
@@ -18,6 +17,7 @@ const Search = () => {
       setUser(data);
     } catch (err) {
       setError('Looks like we can\'t find the user.');
+      setUser(null); // Clear user state if there's an error
     } finally {
       setLoading(false);
     }
@@ -38,8 +38,8 @@ const Search = () => {
       {error && <p>{error}</p>}
       {user && (
         <div>
-          <h2>{user.name}</h2>
-          <img src={user.avatar_url} alt={user.name} width="100" />
+          <h2>{user.name || user.login}</h2> {/* Display user name or login if name is not available */}
+          <img src={user.avatar_url} alt={user.login} width="100" />
           <p>
             <a href={user.html_url} target="_blank" rel="noopener noreferrer">
               View Profile
