@@ -1,13 +1,14 @@
-// src/App.jsx or another component where the search is handled
+// src/App.jsx
 import React, { useState } from 'react';
-import { fetchGitHubUser } from './services/api'; // Adjust the path based on your file structure
+import SearchBar from './components/SearchBar';
+import UserProfile from './components/UserProfile';
+import { fetchGitHubUser } from './services/api';
 
 const App = () => {
-  const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
-  const handleSearch = async () => {
+  const handleSearch = async (username) => {
     try {
       const data = await fetchGitHubUser(username);
       setUserData(data);
@@ -21,22 +22,9 @@ const App = () => {
   return (
     <div>
       <h1>GitHub User Search</h1>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter GitHub username"
-      />
-      <button onClick={handleSearch}>Search</button>
-
+      <SearchBar onSearch={handleSearch} />
       {error && <p>{error}</p>}
-      {userData && (
-        <div>
-          <h2>{userData.name}</h2>
-          <p>{userData.bio}</p>
-          <a href={userData.html_url}>View GitHub Profile</a>
-        </div>
-      )}
+      <UserProfile userData={userData} />
     </div>
   );
 };
