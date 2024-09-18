@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
   const [username, setUsername] = useState('');
@@ -14,10 +14,10 @@ const Search = () => {
     setUserData(null);
 
     try {
-      const response = await axios.get(`https://api.github.com/users/${username}`);
-      setUserData(response.data);
+      const data = await fetchUserData(username);
+      setUserData(data);
     } catch (err) {
-      setError('Looks like we cant find the user');
+      setError(err.message); // Use the error message from fetchUserData
     } finally {
       setLoading(false);
     }
