@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
@@ -18,7 +17,7 @@ const Search = () => {
       const data = await fetchUserData(username); // Fetch user data
       setUserData(data); // Set the user data
     } catch (err) {
-      setError(err.message); // Display "Looks like we can't find the user"
+      setError("Looks like we cant find the user"); // Update this message to the exact test requirement
     } finally {
       setLoading(false); // Stop loading
     }
