@@ -1,11 +1,12 @@
-// src/services/githubService.js
 import axios from 'axios';
 
-export const fetchUserData = async (username) => {
-  try {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
-    return response.data;
-  } catch (error) {
-    throw new Error("Looks like we cant find the user"); // This will trigger the exact message in the component
-  }
+const BASE_URL = 'https://api.github.com/search/users';
+
+export const fetchUserData = async ({ username, location, repos }) => {
+  let query = `q=${username}`;
+  if (location) query += `+location:${location}`;
+  if (repos) query += `+repos:>${repos}`;
+  
+  const response = await axios.get(`${BASE_URL}?${query}`);
+  return response.data.items;
 };
