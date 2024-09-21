@@ -1,7 +1,8 @@
+// src/components/UserProfile.jsx
 import React, { useContext } from 'react';
-import UserContext from '../UserContext';
+import UserContext from '../UserContext';  // Ensure the correct path
 
-function UserDetails() {
+function UserProfile() {
   const userData = useContext(UserContext);
 
   return (
@@ -12,4 +13,4 @@ function UserDetails() {
   );
 }
 
-export default UserDetails;
+export default UserProfile;
