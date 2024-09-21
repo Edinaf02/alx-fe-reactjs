@@ -1,6 +1,6 @@
 // src/components/UserProfile.jsx
 import React, { useContext } from 'react';
-import UserContext from '../UserContext';  // Ensure the correct path
+import UserContext from '../UserContext';
 
 function UserProfile() {
   const userData = useContext(UserContext);
